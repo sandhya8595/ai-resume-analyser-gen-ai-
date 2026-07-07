@@ -2,9 +2,7 @@ import axios from 'axios'
 
 // In production: VITE_API_URL = https://your-backend.onrender.com
 // In development: falls back to local proxy via vite.config.js
-const BASE_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api'
+const BASE_URL = 'https://ai-resume-analyser-gen-ai-backend.onrender.com/api'
 
 const api = axios.create({
   baseURL: BASE_URL,
