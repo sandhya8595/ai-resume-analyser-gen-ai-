@@ -22,9 +22,7 @@ if (!fs.existsSync(uploadsDir)) {
 connectDB();
 
 // ── Global Middleware ─────────────────────────────────────────────────────────
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? [process.env.FRONTEND_URL].filter(Boolean)
-  : ['http://localhost:5173', 'http://localhost:3000'];
+const allowedOrigins = ['https://ai-resume-analyser-gen-ai.onrender.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
