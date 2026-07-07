@@ -1,11 +1,16 @@
 import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_API_URL || '/api'
+// In production: VITE_API_URL = https://your-backend.onrender.com
+// In development: falls back to local proxy via vite.config.js
+const BASE_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : '/api'
 
 const api = axios.create({
   baseURL: BASE_URL,
   timeout: 120000, // 2 min — Gemini calls can be slow
   headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
 })
 
 // Response interceptor — unwrap data or throw clean error
