@@ -13,6 +13,7 @@ An AI-powered Resume Analyzer that helps job seekers improve their resumes by pr
 🔐 Secure User Authentication (JWT)
 ☁️ Cloud Database Integration
 📱 Responsive User Interface
+
 🛠 Tech Stack
 Frontend
 React.js
@@ -25,9 +26,6 @@ Node.js
 Express.js
 REST API
 Database
-MongoDB Atlas
-Mongoose
-Generative AI
 Google Gemini API
 LangChain
 RAG (Retrieval-Augmented Generation)
@@ -41,7 +39,7 @@ Git
 GitHub
 Postman
 VS Code
-🏗 Architecture
+
 User
    │
    ▼
@@ -57,7 +55,7 @@ Express API
    ├── Pinecone (Vector Search)
    ▼
 MongoDB Atlas
-📂 Project Structure
+
 AI-Resume-Analyzer/
 │
 ├── client/
@@ -76,6 +74,8 @@ AI-Resume-Analyzer/
 │
 ├── README.md
 └── package.json
+
+
 ⚙️ Installation
 Clone Repository
 git clone https://github.com/yourusername/AI-Resume-Analyzer.git
@@ -171,4 +171,5 @@ MERN Stack Developer
 Generative AI Enthusiast
 
 
-LinkedIn:www.linkedin.com/in/sandhya-rajput-117023346
+LinkedIn: https://linkedin.com/in/yourprofile
+
