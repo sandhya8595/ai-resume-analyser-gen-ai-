@@ -1,54 +1,203 @@
 # 🤖 AI Resume Analyzer
 
-An AI-powered Resume Analyzer built using the **MERN Stack** and **Generative AI** to help job seekers evaluate and improve their resumes. The application analyzes resumes against job descriptions, calculates ATS compatibility, identifies missing skills, provides personalized improvement suggestions, and generates interview questions using Google's Gemini AI.
+AI Resume Analyzer is an intelligent resume analysis platform powered by Generative AI. The application utilizes Google Gemini, LangChain, Retrieval-Augmented Generation (RAG), and Pinecone Vector Database to analyze resumes in the context of a given job description and generate meaningful, context-aware insights.
+
+Unlike conventional ATS tools that primarily rely on keyword matching, the system performs semantic analysis by converting resume content into vector embeddings and retrieving the most relevant information through a RAG pipeline. This enables the language model to generate accurate, personalized, and contextually relevant recommendations.
+
+The application provides ATS compatibility analysis, job description match percentage, skill gap identification, resume improvement suggestions, and AI-generated interview questions, helping candidates optimize their resumes for better career opportunities.
 
 ---
 
-## 🚀 Features
+## Overview
 
-- 📄 Upload Resume in PDF format
-- 🤖 AI-powered Resume Analysis
-- 🎯 ATS Compatibility Score
-- 📊 Resume & Job Description Match Percentage
-- 🛠 Skill Gap Detection
-- 💡 Personalized Resume Improvement Suggestions
-- ❓ AI-generated Interview Questions
-- 🔐 Secure User Authentication using JWT
-- ☁️ MongoDB Atlas Database Integration
-- 📱 Fully Responsive User Interface
+Many candidates submit resumes without knowing whether they align with the requirements of their desired roles. Traditional resume screening systems often depend on keyword-based filtering, which may fail to capture the true context of a candidate's skills and experience.
+
+AI Resume Analyzer addresses this limitation by combining Large Language Models with semantic vector search. When a resume is uploaded, the application extracts the content, generates vector embeddings, and stores them in Pinecone Vector Database. During analysis, LangChain retrieves the most relevant resume context, which is then provided to Google Gemini through a Retrieval-Augmented Generation (RAG) pipeline.
+
+This architecture enables the application to produce context-aware responses, including ATS compatibility analysis, resume-to-job matching, skill gap detection, resume enhancement recommendations, and personalized interview questions, delivering significantly more accurate and meaningful results than traditional keyword-based approaches.
+
+# ✨ Features
+
+### 📄 Resume Analysis
+- Upload Resume in PDF Format
+- Extract Resume Content
+- AI-Powered Resume Evaluation
+
+### 🎯 ATS Analysis
+- ATS Compatibility Score
+- Resume Quality Assessment
+- Resume Strength Analysis
+
+### 📊 Job Matching
+- Resume vs Job Description Comparison
+- Match Percentage
+- Missing Skills Detection
+- Skill Gap Analysis
+
+### 🤖 AI Assistance
+- Personalized Resume Suggestions
+- Resume Improvement Tips
+- AI Generated Interview Questions
+- Context-Aware AI Responses
+
+### 🔐 Security
+- JWT Authentication
+- Secure User Login
+- Protected Routes
 
 ---
 
-## 🛠 Tech Stack
+# 🧠 Core AI Technologies
 
-### Frontend
+This project demonstrates practical implementation of modern Generative AI concepts including:
+
+- Large Language Models (LLMs)
+- Retrieval-Augmented Generation (RAG)
+- Vector Embeddings
+- Semantic Search
+- Prompt Engineering
+- Context Retrieval
+- AI Response Generation
+
+---
+
+# 🔄 AI Workflow
+
+```text
+             Resume PDF
+                  │
+                  ▼
+         Text Extraction
+                  │
+                  ▼
+       Document Chunking
+                  │
+                  ▼
+     Embedding Generation
+                  │
+                  ▼
+     Pinecone Vector Database
+                  │
+                  ▼
+      Semantic Context Retrieval
+                  │
+                  ▼
+            LangChain
+                  │
+                  ▼
+      Google Gemini LLM
+                  │
+                  ▼
+      Intelligent AI Response
+                  │
+                  ├──────── ATS Score
+                  ├──────── Match Percentage
+                  ├──────── Missing Skills
+                  ├──────── Resume Suggestions
+                  └──────── Interview Questions
+```
+
+---
+
+# 🏗 System Architecture
+
+```text
+                 React Frontend
+                        │
+                        ▼
+               Express REST API
+                        │
+       ┌────────────────┼────────────────┐
+       │                │                │
+       ▼                ▼                ▼
+MongoDB Atlas     JWT Authentication    Resume Upload
+                                        │
+                                        ▼
+                                Resume Processing
+                                        │
+                                        ▼
+                               Generate Embeddings
+                                        │
+                                        ▼
+                           Pinecone Vector Database
+                                        │
+                                        ▼
+                                  LangChain RAG
+                                        │
+                                        ▼
+                                Google Gemini API
+                                        │
+                                        ▼
+                           AI Generated Resume Analysis
+```
+
+---
+
+# 💡 Why RAG?
+
+Traditional AI models may generate responses without considering the user's actual resume.
+
+This project uses **Retrieval-Augmented Generation (RAG)** to retrieve relevant resume content before sending it to the language model. This improves response quality, reduces hallucinations, and provides context-aware suggestions tailored to the uploaded resume.
+
+---
+
+# 📌 Why Pinecone?
+
+Pinecone serves as the vector database for storing resume embeddings.
+
+Instead of searching through plain text, Pinecone performs **semantic similarity search**, allowing the application to retrieve the most relevant sections of the resume based on the job description.
+
+This significantly improves the accuracy of AI-generated insights.
+
+---
+
+# 🛠 Tech Stack
+
+## 🧠 Generative AI
+
+- Google Gemini API
+- LangChain
+- Pinecone Vector Database
+- Retrieval-Augmented Generation (RAG)
+- Embeddings
+- Prompt Engineering
+
+---
+
+## 💻 Frontend
+
 - React.js
 - JavaScript
 - HTML5
 - CSS3
 - Axios
 
-### Backend
+---
+
+## ⚙ Backend
+
 - Node.js
 - Express.js
-- REST API
+- REST APIs
 
-### Database
+---
+
+## 🗄 Database
+
 - MongoDB Atlas
 - Mongoose
 
-### Generative AI
-- Google Gemini API
-- LangChain
-- Retrieval-Augmented Generation (RAG)
-- Pinecone Vector Database
-- Embeddings
+---
 
-### Authentication
-- JWT (JSON Web Token)
+## 🔒 Authentication
+
+- JWT Authentication
 - bcrypt.js
 
-### Tools & Platforms
+---
+
+## 🧰 Developer Tools
+
 - Git
 - GitHub
 - Postman
@@ -56,269 +205,105 @@ An AI-powered Resume Analyzer built using the **MERN Stack** and **Generative AI
 
 ---
 
-## 🏗️ System Architecture
+# 📂 Folder Structure
 
 ```text
-                +----------------------+
-                |      React Client    |
-                +----------+-----------+
-                           |
-                           |
-                    REST API Request
-                           |
-                           ▼
-                +----------------------+
-                | Express.js Backend   |
-                +----------+-----------+
-                           |
-      +--------------------+---------------------+
-      |                    |                     |
-      ▼                    ▼                     ▼
-JWT Authentication   Gemini AI API        MongoDB Atlas
-                           |
-                           ▼
-                     LangChain
-                           |
-                           ▼
-                    Pinecone Vector DB
-                           |
-                           ▼
-                   AI Generated Response
+AI-Resume-Analyzer
+│
+├── client
+│   ├── public
+│   ├── src
+│   ├── components
+│   ├── pages
+│   └── services
+│
+├── server
+│   ├── controllers
+│   ├── routes
+│   ├── middleware
+│   ├── models
+│   ├── config
+│   ├── utils
+│   ├── services
+│   └── uploads
+│
+└── README.md
 ```
 
 ---
 
-## 📂 Project Structure
-
-```text
-AI-Resume-Analyzer/
-│
-├── client/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── context/
-│   │   ├── services/
-│   │   └── App.js
-│   └── package.json
-│
-├── server/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── config/
-│   ├── utils/
-│   ├── uploads/
-│   ├── server.js
-│   └── package.json
-│
-├── README.md
-└── package.json
-```
-
----
-
-## ⚙️ Installation
-
-### 1. Clone the Repository
+# 🚀 Installation
 
 ```bash
-git clone https://github.com/your-github-username/AI-Resume-Analyzer.git
-```
+git clone https://github.com/sandhya8595/ai-resume-analyser-gen-ai-.git
 
-### 2. Navigate to the Project Folder
+cd ai-resume-analyser-gen-ai-
 
-```bash
-cd AI-Resume-Analyzer
-```
-
-### 3. Install Backend Dependencies
-
-```bash
 cd server
 npm install
-```
 
-### 4. Install Frontend Dependencies
-
-```bash
 cd ../client
 npm install
 ```
 
 ---
 
-## 🔑 Environment Variables
-
-Create a `.env` file inside the **server** folder.
+# 🔑 Environment Variables
 
 ```env
 PORT=5000
 
-MONGO_URI=your_mongodb_connection_string
+MONGO_URI=
 
-JWT_SECRET=your_jwt_secret
+JWT_SECRET=
 
-GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=
 
-PINECONE_API_KEY=your_pinecone_api_key
+PINECONE_API_KEY=
 
 PINECONE_INDEX_NAME=resume-analyser
 ```
 
 ---
 
-## ▶️ Running the Project
+# 🎯 Learning Outcomes
 
-### Start Backend
+This project helped me gain practical experience in:
 
-```bash
-cd server
-npm run dev
-```
-
-### Start Frontend
-
-```bash
-cd client
-npm start
-```
-
----
-
-## 🔄 How It Works
-
-1. User uploads a resume in PDF format.
-2. Resume text is extracted and processed.
-3. Embeddings are generated and stored in Pinecone.
-4. User provides a job description.
-5. LangChain retrieves relevant resume information.
-6. Google Gemini analyzes the resume against the job description.
-7. The application generates:
-   - ATS Score
-   - Match Percentage
-   - Missing Skills
-   - Resume Improvement Suggestions
-   - AI-generated Interview Questions
+- Building Generative AI Applications
+- Working with Large Language Models
+- Retrieval-Augmented Generation
+- Vector Databases
+- Semantic Search
+- LangChain Framework
+- Prompt Engineering
+- Full Stack Development
+- API Integration
+- Authentication & Authorization
 
 ---
 
-## 📸 Screenshots
+# 🚀 Future Enhancements
 
-> Add screenshots of your application here.
-
-| Page | Screenshot |
-|------|------------|
-| Home Page | Add Image |
-| Login Page | Add Image |
-| Dashboard | Add Image |
-| Resume Upload | Add Image |
-| ATS Analysis | Add Image |
-| Interview Questions | Add Image |
+- Resume Ranking
+- AI Cover Letter Generator
+- Multi-language Resume Analysis
+- Resume Keyword Optimizer
+- Company-Specific ATS Checker
+- AI Career Roadmap
+- Resume Version Comparison
+- Resume Analytics Dashboard
 
 ---
 
-## 🌟 Key Highlights
+# 👩‍💻 Author
 
-- AI-powered resume evaluation
-- Retrieval-Augmented Generation (RAG)
-- Vector search using Pinecone
-- Secure JWT Authentication
-- MERN Stack Architecture
-- RESTful APIs
-- Responsive Design
-- Modular Code Structure
+## Sandhya Rajput
 
----
+🎓 B.Tech CSE (AIML)
 
-## 🎯 Future Enhancements
+💻 Full Stack Developer
 
-- 📑 Cover Letter Generator
-- 🌍 Multi-language Resume Analysis
-- 📈 Resume Version Comparison
-- 🎨 Resume Templates
-- 📋 Resume Keyword Optimizer
-- 🏢 Company-specific ATS Analysis
-- 🤖 AI Career Roadmap
-- 📊 Resume Analytics Dashboard
+🤖 Generative AI Enthusiast
 
----
-
-## 🧪 API Endpoints (Example)
-
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| POST | `/api/auth/register` | Register User |
-| POST | `/api/auth/login` | Login User |
-| POST | `/api/resume/upload` | Upload Resume |
-| POST | `/api/resume/analyze` | Analyze Resume |
-| GET | `/api/user/profile` | User Profile |
-
----
-
-## 🤝 Contributing
-
-Contributions are always welcome!
-
-1. Fork the repository
-2. Create a feature branch
-
-```bash
-git checkout -b feature-name
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "Add new feature"
-```
-
-4. Push to your branch
-
-```bash
-git push origin feature-name
-```
-
-5. Open a Pull Request
-
----
-
-## 👩‍💻 Author
-
-**Sandhya Rajput**
-
-- 🎓 B.Tech CSE (AIML)
-- 💻 MERN Stack Developer
-- 🤖 Generative AI Enthusiast
-
-**GitHub:** https://github.com/your-github-username
-
-**LinkedIn:** https://linkedin.com/in/your-linkedin-profile
-
----
-
-## ⭐ Show Your Support
-
-If you found this project helpful, please consider giving it a ⭐ on GitHub.
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## 🙌 Acknowledgements
-
-- Google Gemini API
-- LangChain
-- Pinecone
-- MongoDB Atlas
-- React.js
-- Express.js
-- Node.js
-
----
+It motivates me to build more open-source AI projects.
