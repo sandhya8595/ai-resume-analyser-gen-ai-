@@ -59,9 +59,11 @@ export function useAnalysisFlow() {
     clearError()
     setAnalyzing(true)
     try {
-      const data = await apiAnalyze(id || resumeId, jd || jobDescription)
-      setAnalysis(data)
-      return data
+      const res = await apiAnalyze(id || resumeId, jd || jobDescription)
+      // res = { success, data, message } — extract the actual payload
+      const payload = res?.data || res
+      setAnalysis(payload)
+      return payload
     } catch (err) {
       setError(err.message)
       throw err
@@ -77,9 +79,11 @@ export function useAnalysisFlow() {
     clearError()
     setMatching(true)
     try {
-      const data = await apiMatchJob(id || resumeId, jd || jobDescription)
-      setMatchResult(data)
-      return data
+      const res = await apiMatchJob(id || resumeId, jd || jobDescription)
+      // res = { success, data, message } — extract the actual payload
+      const payload = res?.data || res
+      setMatchResult(payload)
+      return payload
     } catch (err) {
       setError(err.message)
       throw err
@@ -95,9 +99,11 @@ export function useAnalysisFlow() {
     clearError()
     setGeneratingQs(true)
     try {
-      const data = await apiGenQs(id || resumeId, jd || jobDescription)
-      setInterviewQs(data)
-      return data
+      const res = await apiGenQs(id || resumeId, jd || jobDescription)
+      // res = { success, data, message } — extract the actual payload
+      const payload = res?.data || res
+      setInterviewQs(payload)
+      return payload
     } catch (err) {
       setError(err.message)
       throw err

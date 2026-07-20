@@ -6,6 +6,8 @@
 const RESUME_ANALYSIS_PROMPT = (resumeText, jobDescription = '') => `
 You are an expert ATS (Applicant Tracking System) and career coach AI. Analyze the following resume${jobDescription ? ' against the provided job description' : ''}.
 
+CRITICAL INSTRUCTION: You MUST respond with ONLY a valid JSON object. Do NOT include any greeting, explanation, markdown, or text before or after the JSON. Start your response directly with { and end with }.
+
 RESUME:
 """
 ${resumeText}
@@ -13,7 +15,7 @@ ${resumeText}
 
 ${jobDescription ? `JOB DESCRIPTION:\n"""\n${jobDescription}\n"""\n` : ''}
 
-Perform a thorough analysis and return ONLY a valid JSON object (no markdown, no explanation) with this exact structure:
+Return ONLY this exact JSON structure (no other text):
 
 {
   "summary": "A concise 3-4 sentence professional summary of the candidate",
@@ -54,6 +56,8 @@ ${jobDescription ? 'Missing Skills: List skills mentioned in the JD that are abs
 const JOB_MATCH_PROMPT = (resumeText, jobDescription) => `
 You are an expert recruiter and ATS system. Compare this resume against the job description.
 
+CRITICAL INSTRUCTION: Respond with ONLY a valid JSON object. No greeting, no explanation, no markdown. Start directly with { and end with }.
+
 RESUME:
 """
 ${resumeText}
@@ -64,7 +68,7 @@ JOB DESCRIPTION:
 ${jobDescription}
 """
 
-Return ONLY a valid JSON object with this exact structure:
+Return ONLY this exact JSON structure:
 
 {
   "matchPercentage": <number 0-100>,
@@ -96,6 +100,8 @@ Return ONLY a valid JSON object with this exact structure:
 const INTERVIEW_QUESTIONS_PROMPT = (resumeText, jobDescription = '') => `
 You are an expert technical interviewer. Based on the resume${jobDescription ? ' and job description' : ''} below, generate highly relevant interview questions.
 
+CRITICAL INSTRUCTION: Respond with ONLY a valid JSON object. No greeting, no explanation, no markdown. Start directly with { and end with }.
+
 RESUME:
 """
 ${resumeText}
@@ -109,7 +115,7 @@ Generate questions that probe:
 - Situational problem-solving
 - Culture fit and soft skills
 
-Return ONLY a valid JSON object with this exact structure:
+Return ONLY this exact JSON structure:
 
 {
   "technical": [

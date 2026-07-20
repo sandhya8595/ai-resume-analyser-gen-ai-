@@ -42,6 +42,7 @@ export const uploadResume = async (file, onProgress) => {
       }
     },
   })
+  // Interceptor returns { success, data, message } — backend payload is in .data
   return res.data
 }
 
@@ -53,7 +54,9 @@ export const uploadResume = async (file, onProgress) => {
  */
 export const analyzeResume = async (resumeId, jobDescription = '') => {
   const res = await api.post('/analyze-resume', { resumeId, jobDescription })
-  return res.data
+  // Interceptor already unwrapped axios res.data → { success, data, message }
+  // res here = { success, data, message }, so return res.data for the payload
+  return res
 }
 
 /**
@@ -64,7 +67,8 @@ export const analyzeResume = async (resumeId, jobDescription = '') => {
  */
 export const matchJob = async (resumeId, jobDescription) => {
   const res = await api.post('/match-job', { resumeId, jobDescription })
-  return res.data
+  // Interceptor already unwrapped → res = { success, data, message }
+  return res
 }
 
 /**
@@ -75,7 +79,8 @@ export const matchJob = async (resumeId, jobDescription) => {
  */
 export const generateInterviewQuestions = async (resumeId, jobDescription = '') => {
   const res = await api.post('/generate-interview-questions', { resumeId, jobDescription })
-  return res.data
+  // Interceptor already unwrapped → res = { success, data, message }
+  return res
 }
 
 /**
@@ -85,7 +90,8 @@ export const generateInterviewQuestions = async (resumeId, jobDescription = '') 
  */
 export const getAnalysis = async (resumeId) => {
   const res = await api.get(`/analysis/${resumeId}`)
-  return res.data
+  // Interceptor already unwrapped → res = { success, data }
+  return res
 }
 
 export default api

@@ -44,20 +44,47 @@ const isRetryableGeminiError = (error) => {
 };
 
 const parseGeminiJson = (rawContent) => {
-  const jsonString = String(rawContent || '')
+  const raw = String(rawContent || '').trim();
+
+  // Strategy 1: Extract JSON from a ```json ... ``` code block
+  const codeBlockMatch = raw.match(/```json\s*([\s\S]*?)```/i);
+  if (codeBlockMatch) {
+    try {
+      return JSON.parse(codeBlockMatch[1].trim());
+    } catch (_) { /* fall through */ }
+  }
+
+  // Strategy 2: Strip ALL backtick fences then try direct parse
+  const stripped = raw
     .replace(/```json\n?/gi, '')
     .replace(/```\n?/gi, '')
     .trim();
 
   try {
-    return JSON.parse(jsonString);
-  } catch (parseError) {
-    const jsonMatch = jsonString.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
-    }
-    throw new Error(`Failed to parse Gemini JSON response: ${parseError.message}`);
+    return JSON.parse(stripped);
+  } catch (_) { /* fall through */ }
+
+  // Strategy 3: Find the FIRST '{' and LAST '}' — handles text before/after JSON
+  const firstBrace = stripped.indexOf('{');
+  const lastBrace = stripped.lastIndexOf('}');
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
+    const candidate = stripped.slice(firstBrace, lastBrace + 1);
+    try {
+      return JSON.parse(candidate);
+    } catch (_) { /* fall through */ }
   }
+
+  // Strategy 4: Greedy regex fallback (original approach)
+  const jsonMatch = stripped.match(/\{[\s\S]*\}/);
+  if (jsonMatch) {
+    try {
+      return JSON.parse(jsonMatch[0]);
+    } catch (_) { /* fall through */ }
+  }
+
+  throw new Error(
+    `Failed to parse Gemini JSON response. Raw content preview: ${raw.substring(0, 200)}`
+  );
 };
 
 const invokeGeminiWithRetries = async (prompt, modelName, maxAttempts = 3) => {

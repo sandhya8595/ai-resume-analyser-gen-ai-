@@ -16,8 +16,13 @@ export default function Dashboard({ analysis, matchResult, interviewQs, jobDescr
   const improvements = analysis.improvements || []
   
   // Aggregate match info if available
-  const hasJobMatch = Boolean(matchResult && jobDescription)
-  const missingSkills = hasJobMatch ? matchResult.missingSkills : analysis.missingSkills
+  // Use matchResult for detailed match data, fall back to analysis-level data
+  const hasJobMatch = Boolean(matchResult)
+  const missingSkills = hasJobMatch
+    ? (matchResult.missingSkills || [])
+    : (analysis.missingSkills || [])
+  // hasJD: true whenever there are missing skills (meaning a JD was analysed)
+  const hasJD = hasJobMatch || (Array.isArray(analysis.missingSkills) && analysis.missingSkills.length > 0)
 
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6">
@@ -58,7 +63,7 @@ export default function Dashboard({ analysis, matchResult, interviewQs, jobDescr
       {/* Middle Row: Skills Analysis */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <SkillsCard extractedSkills={analysis.extractedSkills} />
-        <MissingSkillsCard missingSkills={missingSkills || []} hasJD={hasJobMatch} />
+        <MissingSkillsCard missingSkills={missingSkills} hasJD={hasJD} />
       </div>
 
       {/* Bottom Row: Suggestions & Interview Prep */}
